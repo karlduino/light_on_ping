@@ -20,3 +20,18 @@ I'm using a raspberry pi to monitor 3 routers:
   - also a bunch more but they double for I2C, SPI, and UART
 
 ![old pi pinout](https://howto8165.files.wordpress.com/2014/08/rpi-pinout.png)
+
+To run in background at startup, can use a cron job.
+See [this instructable](https://www.instructables.com/Raspberry-Pi-Launch-Python-script-on-startup/).
+
+Run: 
+
+```
+sudo crontab -e
+```
+
+Then enter line:
+
+```
+@reboot /full/path/to/script/light_on_ping.py
+```
