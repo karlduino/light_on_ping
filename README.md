@@ -21,6 +21,8 @@ I'm using a raspberry pi to monitor 3 routers:
 
 ![old pi pinout](https://howto8165.files.wordpress.com/2014/08/rpi-pinout.png)
 
+### Run in background
+
 To run in background at startup, can use a cron job.
 See [this instructable](https://www.instructables.com/Raspberry-Pi-Launch-Python-script-on-startup/).
 
@@ -36,7 +38,12 @@ Then enter line:
 @reboot /full/path/to/script/light_on_ping.py
 ```
 
-I had a problem where the script would start before the network connection had been established. 
-Fixed this by changing a setting in `raspi-config`: under "system options", there's an option 
-"network at boot", to wait for a network connection to be established before proceeding.
+### Challenges
 
+- I had a problem where the script would start before the network connection had been established. 
+  Fixed this by changing a setting in `raspi-config`: under "system options", there's an option 
+  "network at boot", to wait for a network connection to be established before proceeding.
+
+- My main challenge was a lot of false alarms. I thought this had to do with a weak WIFI signal 
+  when I closed the cigar box I'd made to enclose the project. Seems to have been fixed by 
+  using `ping response != 1` rather than `ping response == 0` as rule for success. 
