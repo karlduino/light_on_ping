@@ -33,8 +33,8 @@ def ping(host):
     Returns True if host (str) responds to a ping request
     """
 
-    # Build the command (-w total time; -c number of packets)
-    command = ['ping', '-w', '5', '-c', str(n_packets), host]
+    # Build the command (-c number of packets)
+    command = ['ping', '-c', str(n_packets), host]
 
     # don't print anything
     with open(os.devnull, 'w') as DEVNULL:
