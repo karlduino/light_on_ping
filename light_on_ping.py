@@ -3,6 +3,7 @@
 from gpiozero import LED
 import platform   # for getting operating system name
 import subprocess # for executing a shell command
+import os         # for devnull
 from time import sleep
 
 # wait time between pings
@@ -36,7 +37,8 @@ def ping(host):
     # Build the command
     command = ['ping', param, '1', host]
 
-    return subprocess.call(command) == 0
+    with open(os.devnull, 'w') as DEVNULL:
+        return subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL) == 0
 
 def light_on_ping(host, green_led, red_led):
     if ping(host):
