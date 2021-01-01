@@ -7,7 +7,7 @@ import os         # for devnull
 from time import sleep
 
 # wait time between pings
-ping_wait = 120
+ping_wait = 40
 startup_wait = 0.5
 
 # hosts
@@ -69,8 +69,15 @@ led_red3 = LED(red3)
 startup([led_green1, led_green2, led_green3,
          led_red1, led_red2, led_red3], startup_wait)
 
+wait_time = 0
 while True:
     light_on_ping(host1, led_green1, led_red1)
+    sleep(wait_time)
+
     light_on_ping(host2, led_green2, led_red2)
+    sleep(wait_time)
+
     light_on_ping(host3, led_green3, led_red3)
-    sleep(10)
+    sleep(wait_time)
+
+    wait_time = ping_wait
