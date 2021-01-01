@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from gpiozero import LED
-import platform   # for getting operating system name
 import subprocess # for executing a shell command
 import os         # for devnull
 from time import sleep
@@ -10,7 +9,7 @@ from math import ceil
 # wait time between pings
 ping_wait = 40
 startup_wait = 0.5
-n_packets=3
+n_packets=5
 blink_time=0.1
 
 # hosts
@@ -34,12 +33,10 @@ def ping(host):
     Returns True if host (str) responds to a ping request
     """
 
-    # Option for the number of packets
-    param = '-n' if platform.system().lower()=='windows' else '-c'
+    # Build the command (-w total time; -c number of packets)
+    command = ['ping', '-w', '5', '-c', str(n_packets), host]
 
-    # Build the command
-    command = ['ping', param, str(n_packets), host]
-
+    # don't print anything
     with open(os.devnull, 'w') as DEVNULL:
         return subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL) == 0
 
