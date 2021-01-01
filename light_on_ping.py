@@ -73,13 +73,13 @@ startup([led_green1, led_green2, led_green3,
 
 wait_time = 0
 while True:
+    sleep(wait_time)
     light_on_ping(host1, led_green1, led_red1)
-    sleep(wait_time)
 
+    sleep(wait_time)
     light_on_ping(host2, led_green2, led_red2)
-    sleep(wait_time)
 
-    light_on_ping(host3, led_green3, led_red3)
     sleep(wait_time)
+    light_on_ping(host3, led_green3, led_red3)
 
     wait_time = ping_wait
