@@ -35,3 +35,8 @@ Then enter line:
 ```
 @reboot /full/path/to/script/light_on_ping.py
 ```
+
+I had a problem where the script would start before the network connection had been established. 
+Fixed this by changing a setting in `raspi-config`: under "system options", there's an option 
+"network at boot", to wait for a network connection to be established before proceeding.
+
