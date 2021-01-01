@@ -5,10 +5,13 @@ import platform   # for getting operating system name
 import subprocess # for executing a shell command
 import os         # for devnull
 from time import sleep
+from math import ceil
 
 # wait time between pings
 ping_wait = 40
 startup_wait = 0.5
+n_packets=3
+blink_time=0.1
 
 # hosts
 host1 = '192.168.0.1'
@@ -35,12 +38,14 @@ def ping(host):
     param = '-n' if platform.system().lower()=='windows' else '-c'
 
     # Build the command
-    command = ['ping', param, '3', host]
+    command = ['ping', param, str(n_packets), host]
 
     with open(os.devnull, 'w') as DEVNULL:
         return subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL) == 0
 
 def light_on_ping(host, green_led, red_led):
+    green_led.blink(blink_time, blink_time, ceil(n_packets/blink_time), True)
+
     if ping(host):
         green_led.on()
         red_led.off()
