@@ -7,7 +7,7 @@ import os         # for devnull
 from time import sleep
 
 # wait time between pings
-ping_wait = 60
+ping_wait = 120
 startup_wait = 0.5
 
 # hosts
@@ -35,7 +35,7 @@ def ping(host):
     param = '-n' if platform.system().lower()=='windows' else '-c'
 
     # Build the command
-    command = ['ping', param, '5', host]
+    command = ['ping', param, '3', host]
 
     with open(os.devnull, 'w') as DEVNULL:
         return subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL) == 0
