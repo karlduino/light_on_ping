@@ -47,3 +47,7 @@ Then enter line:
 - My main challenge was a lot of false alarms. I thought this had to do with a weak WIFI signal 
   when I closed the cigar box I'd made to enclose the project. Seems to have been fixed by 
   using `ping response != 1` rather than `ping response == 0` as rule for success. 
+
+### License
+
+Released under the [MIT license](LICENSE.md).
