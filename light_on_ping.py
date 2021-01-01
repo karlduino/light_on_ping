@@ -7,9 +7,10 @@ from time import sleep
 from math import ceil
 
 # wait time between pings
-ping_wait = 40
+ping_wait = 20
 startup_wait = 0.5
-n_packets=5
+n_packets=2
+packet_size=32
 blink_time=0.1
 
 # hosts
@@ -33,12 +34,12 @@ def ping(host):
     Returns True if host (str) responds to a ping request
     """
 
-    # Build the command (-c number of packets)
-    command = ['ping', '-c', str(n_packets), host]
+    # Build the command (-c number of packets, -s packet size, -q quiet (just summary))
+    command = ['ping', '-c', str(n_packets), '-s', str(packet_size), '-q', host]
 
     # don't print anything
     with open(os.devnull, 'w') as DEVNULL:
-        return subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL) == 0
+        return subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL) != 1  # 0 = success; 1 = no connection; 2 = other error
 
 def light_on_ping(host, green_led, red_led):
     green_led.blink(blink_time, blink_time, ceil(n_packets/blink_time), True)
