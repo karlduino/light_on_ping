@@ -35,7 +35,7 @@ def ping(host):
     param = '-n' if platform.system().lower()=='windows' else '-c'
 
     # Build the command
-    command = ['ping', param, '1', host]
+    command = ['ping', param, '5', host]
 
     with open(os.devnull, 'w') as DEVNULL:
         return subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL) == 0
